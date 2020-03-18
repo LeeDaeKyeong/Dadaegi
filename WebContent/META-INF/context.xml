@@ -1,0 +1,27 @@
+<Context>
+
+	<Resource name="jdbc/mySQLDB" 
+		auth="Container"
+		type="javax.sql.DataSource" 
+		username="java5sl" 
+		password="java5sl"
+		driverClassName="com.mysql.cj.jdbc.Driver"
+		factory="org.apache.tomcat.dbcp.dbcp2.BasicDataSourceFactory"
+		url="jdbc:mysql://118.131.179.138/java5sl?serverTimezone=UTC"
+		
+		maxActive="500" 
+		maxIdle="100" />
+		
+	<Resource name="jdbc/zipDB" 
+		auth="Container"
+		type="javax.sql.DataSource" 
+		username="java" 
+		password="java"
+		driverClassName="com.mysql.cj.jdbc.Driver"
+		factory="org.apache.tomcat.dbcp.dbcp2.BasicDataSourceFactory"
+		url="jdbc:mysql://localhost:3306/zip?serverTimezone=UTC"
+		
+		maxActive="500" 
+		maxIdle="100" />
+
+</Context>
