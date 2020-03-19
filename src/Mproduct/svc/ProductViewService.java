@@ -1,10 +1,11 @@
 package Mproduct.svc;
 
-import dao.ProductDAO;
 import vo.Product;
 import static db.JdbcUtil.*;
 
 import java.sql.Connection;
+
+import dao.ProductDAO;
 
 public class ProductViewService {
 

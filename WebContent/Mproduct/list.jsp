@@ -88,16 +88,18 @@ form {
 								src="${pageContext.request.contextPath }/images/${product.product_image }"
 								id="productImage" />
 						</a></td>
-						<td>상품명 : ${product.product_name } 가격 : ${product.product_price } 설명
-							: ${product.product_content }</td>
+						<td>상품명 : ${product.product_name } 가격 :
+							${product.product_price } 설명 : ${product.product_content }</td>
 						<td>
 							<form name="mod" action="mod.pro" method="post">
-								<input type="hidden" name="product_name" id="product_name" value="${product.product_name }"/>
-								<input type="submit" value="상품 수정" />
+								<input type="hidden" name="product_name" id="product_name"
+									value="${product.product_name }" /> <input type="submit"
+									value="상품 수정" />
 							</form>
 							<form name="delete" action="delete.pro" method="post">
-							<input type="hidden" name="product_name" id="product_name" value="${product.product_name }"/>
-								<input type="submit" value="상품 삭제" />
+								<input type="hidden" name="product_name" id="product_name"
+									value="${product.product_name }" /> <input type="submit"
+									value="상품 삭제" />
 							</form>
 						</td>
 					</tr>

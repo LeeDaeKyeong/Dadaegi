@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 
 <style type="text/css">
-#registForm {
+#writeForm {
 	width: 500px;
 	height: 610px;
 	margin: auto;
@@ -60,34 +60,34 @@ img {
 				name="product_code" value="${question.product_code }">
 			<table>
 				<tr>
-					<td class="td_left"><label for="question_name">작성자</label></td>
-					<td class="td_right"><input type="text" name="question_name"
-						id="question_name" value="${question.question_name }" /></td>
+					<td class="td_left" height="30px"><label for="question_name">작성자</label></td>
+					<td class="td_right"><input type="hidden" name="question_name"
+						id="question_name" value="${question.question_name }" />${question.question_name }</td>
 				</tr>
 				<tr>
-					<td class="td_left"><label for="member_id">아이디</label></td>
-					<td class="td_right"><input type="text" name="member_id"
-						id="member_id" value="${question.member_id }" /></td>
+					<td class="td_left" height="30px"><label for="member_id">아이디</label></td>
+					<td class="td_right"><input type="hidden" name="member_id"
+						id="member_id" value="${question.member_id }" />${question.member_id }</td>
 				</tr>
 				<tr>
-					<td class="td_left"><label for="question_subject">문의제목</label></td>
-					<td class="td_right"><input type="text"
+					<td class="td_left" height="30px"><label for="question_subject">문의제목</label></td>
+					<td class="td_right"><input type="hidden"
 						name="question_subject" id="question_subject"
-						value="${question.question_subject }" /></td>
+						value="${question.question_subject }" />${question.question_subject }</td>
 				</tr>
 				<tr>
-					<td class="td_left"><label for="product_name">상품명</label></td>
-					<td class="td_right"><input type="text" name="product_name"
-						id="product_name" value="${question.product_name }" /></td>
+					<td class="td_left" height="30px"><label for="product_name">상품명</label></td>
+					<td class="td_right"><input type="hidden" name="product_name"
+						id="product_name" value="${question.product_name }" />${question.product_name }</td>
 				<tr>
 					<td class="td_left"><label for="question_file">리뷰사진</label></td>
 					<td class="td_right"><img
 						src="${pageContext.request.contextPath}/images/${question.question_file}" /></td>
 				</tr>
 				<tr>
-					<td class="td_left"><label for="question_date">작성날짜</label></td>
-					<td class="td_right"><input type="text" name="question_date"
-						id="question_date" value="${question.question_date }" /></td>
+					<td class="td_left" height="30px"><label for="question_date">작성날짜</label></td>
+					<td class="td_right"><input type="hidden" name="question_date"
+						id="question_date" value="${question.question_date }" />${question.question_date }</td>
 				</tr>
 				<tr>
 					<td class="td_left"><label for="question_content">문의내용</label></td>

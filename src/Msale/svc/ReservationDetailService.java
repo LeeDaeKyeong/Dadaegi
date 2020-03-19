@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.util.ArrayList;
 
 import dao.SaleDAO;
-
 import vo.Reservation;
 import static db.JdbcUtil.*;
 

@@ -1,8 +1,11 @@
 package Mproduct.svc;
 
 import java.sql.Connection;
-import static db.JdbcUtil.*;
+
 import dao.ProductDAO;
+
+import static db.JdbcUtil.*;
+
 import vo.Product;
 
 public class ProductModProService {

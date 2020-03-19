@@ -10,12 +10,15 @@
 	padding: 0;
 	margin: 0;
 }
-h2{
-	text-align : center;
+
+h2 {
+	text-align: center;
 }
-a{
+
+a {
 	text-decoration: none;
 }
+
 body {
 	font-size: 9pt;
 }
@@ -436,19 +439,12 @@ footer a {
 		</li>
 		<li>
 			<div class="main-title">
-				<span class="folder"> </span><a>고객혜택관리</a>
-			</div>
-			<ul class="sub">
-				<li><a>고객등급관리</a></li>
-				<li><a>적립금관리</a></li>
-			</ul>
-		</li>
-		<li>
-			<div class="main-title">
 				<span class="folder"> </span><a>회원관리</a>
 			</div>
 			<ul class="sub">
-				<li><a>회원상세보기</a></li>
+				<li><a href="memberList.mem">회원상세보기</a></li>
+				<li><a href="memberRating.mem">회원등급관리</a></li>
+				<li><a href="memberPoint.mem">적립금관리</a></li>
 			</ul>
 		</li>
 	</ul>

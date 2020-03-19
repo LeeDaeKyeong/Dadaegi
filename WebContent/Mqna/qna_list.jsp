@@ -8,11 +8,11 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script>
+<!--<script>
 	setTimeout(function() {
 		location.reload();
 	}, 3000); // 3000밀리초 = 3초
-</script>
+</script>-->
 </head>
 <style>
 #listForm {
@@ -55,9 +55,8 @@ img {
 						class="table table-bordered table-hover text-center">
 						<thead>
 							<tr class="tr_top" height="40px">
-								<td>리뷰번호</td>
-								<td>리뷰제목</td>
-								<td>리뷰사진</td>
+								<td>문의제목</td>
+								<td>문의사진</td>
 								<td>작성자</td>
 								<td>아이디</td>
 								<td>상품명</td>
@@ -69,8 +68,6 @@ img {
 						<c:forEach items="${qnaList }" var="qna">
 							<tbody>
 								<tr height="40px">
-									<td
-										style="${qna.question_status eq '답변완료' ? 'background-color : lightgray' : 'background-color : white'  };">${qna.question_index }</td>
 									<td
 										style="${qna.question_status eq '답변완료' ? 'background-color : lightgray' : 'background-color : white'  };">${qna.question_subject }</td>
 									<td
@@ -102,6 +99,7 @@ img {
 							</tbody>
 						</c:forEach>
 					</table>
+					<!-- 페이지 처리 -->
 					<section id="pageList">
 						<c:choose>
 							<c:when test="${pageInfo.page <=1 }">

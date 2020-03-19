@@ -1,9 +1,10 @@
 package Msale.svc;
 
-import dao.SaleDAO;
 import static db.JdbcUtil.*;
 
 import java.sql.Connection;
+
+import dao.SaleDAO;
 
 public class OrderModService {
 

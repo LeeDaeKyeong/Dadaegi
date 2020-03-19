@@ -9,6 +9,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import Mmember.action.MdeleteAction;
+import Mmember.action.MemberDetailAction;
+import Mmember.action.MemberListAction;
+import Mmember.action.MemberPointAction;
+import Mmember.action.MemberRatingAction;
+import Mmember.action.MmodAction;
 import action.Action;
 import member.action.IdCheckAction;
 import member.action.MemberDelAction;
@@ -82,10 +88,49 @@ public class MemberController extends javax.servlet.http.HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}					
+		}else if (command.equals("/memberList.mem")) {
+			action = new MemberListAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}					
+		}else if (command.equals("/memberRating.mem")) {
+			action = new MemberRatingAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}					
+		}else if (command.equals("/memberPoint.mem")) {
+			action = new MemberPointAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}					
+		}else if (command.equals("/memberDetail.mem")) {
+			action = new MemberDetailAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}	
+		}else if (command.equals("/Mmod.mem")) {
+			action = new MmodAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}					
+		}else if (command.equals("/Mdelete.mem")) {
+			action = new MdeleteAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}					
 		}
-		
-		
-		
 		
 		if (forward != null) {
 

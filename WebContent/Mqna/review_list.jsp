@@ -8,6 +8,11 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<!--<script>
+	setTimeout(function() {
+		location.reload();
+	}, 3000); // 3000밀리초 = 3초
+</script>-->
 </head>
 <style>
 #listForm {
@@ -43,7 +48,7 @@ img {
 	<h2>리뷰 리스트</h2>
 	<section id="listForm">
 		<p>리뷰목록</p>
-		
+
 		<c:choose>
 			<c:when test="${reviewList ne null }">
 				<form method="post">
@@ -51,7 +56,6 @@ img {
 						class="table table-bordered table-hover text-center">
 						<thead>
 							<tr class="tr_top" height="40px">
-								<td>리뷰번호</td>
 								<td>리뷰제목</td>
 								<td>리뷰사진</td>
 								<td>작성자</td>
@@ -62,43 +66,42 @@ img {
 								<td>답변하기</td>
 							</tr>
 						</thead>
-								<c:forEach items="${reviewList }" var="review">
-									<tbody>
-										<tr height="40px">
-											<td
-												style="${review.review_status eq '답변완료' ? 'background-color : lightgray' : 'background-color : white'  };">${review.review_index }</td>
-											<td
-												style="${review.review_status eq '답변완료' ? 'background-color : lightgray' : 'background-color : white'  };">${review.review_subject }</td>
-											<td
-												style="${review.review_status eq '답변완료' ?  'background-color : lightgray' : 'background-color : white'  };"><img
-												src="${pageContext.request.contextPath}/images/${review.review_file }" /></td>
-											<td
-												style="${review.review_status eq '답변완료' ? 'background-color : lightgray' : 'background-color : white'  };">${review.review_name }</td>
-											<td
-												style="${review.review_status eq '답변완료' ? 'background-color : lightgray' : 'background-color : white'  };">${review.member_id }</td>
-											<td
-												style="${review.review_status eq '답변완료' ? 'background-color : lightgray' : 'background-color : white'  };">${review.product_name }</td>
-											<td
-												style="${review.review_status eq '답변완료' ?  'background-color : lightgray' : 'background-color : white'  };">${review.review_date }</td>
-											<td
-												style="${review.review_status eq '답변완료' ?  'background-color : lightgray' : 'background-color : white'  };">${review.review_status }</td>
-											<td
-												style="${review.review_status eq '답변완료' ? 'background-color : lightgray' : 'background-color : white'  };"
-												onClick="window.open('review.qn?review_index=${review.review_index}','new','width=550px,height=900px,location=no,status=no,scrollbars=no');">
-												<c:choose>
-													<c:when test="${review.review_status eq '답변완료' }">
+						<c:forEach items="${reviewList }" var="review">
+							<tbody>
+								<tr height="40px">
+
+									<td
+										style="${review.review_status eq '답변완료' ? 'background-color : lightgray' : 'background-color : white'  };">${review.review_subject }</td>
+									<td
+										style="${review.review_status eq '답변완료' ?  'background-color : lightgray' : 'background-color : white'  };"><img
+										src="${pageContext.request.contextPath}/images/${review.review_file }" /></td>
+									<td
+										style="${review.review_status eq '답변완료' ? 'background-color : lightgray' : 'background-color : white'  };">${review.review_name }</td>
+									<td
+										style="${review.review_status eq '답변완료' ? 'background-color : lightgray' : 'background-color : white'  };">${review.member_id }</td>
+									<td
+										style="${review.review_status eq '답변완료' ? 'background-color : lightgray' : 'background-color : white'  };">${review.product_name }</td>
+									<td
+										style="${review.review_status eq '답변완료' ?  'background-color : lightgray' : 'background-color : white'  };">${review.review_date }</td>
+									<td
+										style="${review.review_status eq '답변완료' ?  'background-color : lightgray' : 'background-color : white'  };">${review.review_status }</td>
+									<td
+										style="${review.review_status eq '답변완료' ? 'background-color : lightgray' : 'background-color : white'  };"
+										onClick="window.open('review.qn?review_index=${review.review_index}','new','width=550px,height=900px,location=no,status=no,scrollbars=no');">
+										<c:choose>
+											<c:when test="${review.review_status eq '답변완료' }">
 													-
 													</c:when>
-													<c:otherwise>
-														<input type="submit" value="답변하기" />
-													</c:otherwise>
-												</c:choose>
-											</td>
-										</tr>
-									</tbody>
-								</c:forEach>
-							
+											<c:otherwise>
+												<input type="submit" value="답변하기" />
+											</c:otherwise>
+										</c:choose>
+									</td>
+								</tr>
+							</tbody>
+						</c:forEach>
 					</table>
+					<!-- 페이지 처리 -->
 					<section id="pageList">
 						<c:choose>
 							<c:when test="${pageInfo.page <=1 }">

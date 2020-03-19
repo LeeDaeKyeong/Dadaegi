@@ -261,8 +261,10 @@ public class QnaDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-			close(rs);
-			close(pstmt);
+			if (rs != null)
+				close(rs);
+			if (pstmt != null)
+				close(pstmt);
 		}
 
 		return insertCount;
@@ -426,8 +428,10 @@ public class QnaDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-			close(rs);
-			close(pstmt);
+			if (rs != null)
+				close(rs);
+			if (pstmt != null)
+				close(pstmt);
 		}
 
 		return insertCount;
