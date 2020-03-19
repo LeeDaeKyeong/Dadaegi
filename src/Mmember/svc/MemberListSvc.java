@@ -35,4 +35,28 @@ public class MemberListSvc {
 		return memberList;
 	}
 
+	public int getListCount() {
+		// TODO Auto-generated method stub
+		Connection con = getConnection();
+		MemberDAO memberDao = MemberDAO.getInstance();
+		memberDao.setConnection(con);
+
+		int listCount = memberDao.selectCount();
+
+		close(con);
+		return listCount;
+	}
+
+	public ArrayList<Member> getMemberList(int page, int limit) {
+		// TODO Auto-generated method stub
+		Connection con = getConnection();
+		MemberDAO memberDao = MemberDAO.getInstance();
+		memberDao.setConnection(con);
+
+		ArrayList<Member> memberList = memberDao.selectMemberList(page, limit);
+
+		close(con);
+		return memberList;
+	}
+
 }

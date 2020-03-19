@@ -109,6 +109,10 @@ public class MemberController extends javax.servlet.http.HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}					
+		}else if (command.equals("/pointList.mem")) {
+			forward = new ActionForward();
+    		request.setAttribute("pagefile", "Mmember/member_point.jsp");
+    		forward.setPath("Mtemplate.jsp");
 		}else if (command.equals("/memberDetail.mem")) {
 			action = new MemberDetailAction();
 			try {

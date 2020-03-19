@@ -99,7 +99,7 @@
 						[이전]&nbsp;
 					</c:when>
 							<c:otherwise>
-								<a href="qnalist.qn?page=${pageInfo.page-1 }">[이전]</a>&nbsp;
+								<a href="memberList.mem?page=${pageInfo.page-1 }">[이전]</a>&nbsp;
 					</c:otherwise>
 						</c:choose>
 						<c:forEach var="a" begin="${pageInfo.startPage }"
@@ -109,7 +109,7 @@
 							[${a }]
 						</c:when>
 								<c:otherwise>
-									<a href="qnalist.qn?page=${a }">[${a }] </a>&nbsp;
+									<a href="memberList.mem?page=${a }">[${a }] </a>&nbsp;
 						</c:otherwise>
 							</c:choose>
 						</c:forEach>
@@ -118,7 +118,7 @@
 						[다음]
 					</c:when>
 							<c:otherwise>
-								<a href="qnalist.qn?page=${pageInfo.page+1 }">[다음]</a>
+								<a href="memberList.mem?page=${pageInfo.page+1 }">[다음]</a>
 							</c:otherwise>
 						</c:choose>
 					</section>
