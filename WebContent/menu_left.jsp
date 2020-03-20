@@ -443,7 +443,7 @@ footer a {
 			</div>
 			<ul class="sub">
 				<li><a href="memberList.mem">회원상세보기</a></li>
-				<li><a href="memberRating.mem">회원등급관리</a></li>
+				<li><a href="ratingList.mem">회원등급관리</a></li>
 				<li><a href="pointList.mem">적립금관리</a></li>
 			</ul>
 		</li>

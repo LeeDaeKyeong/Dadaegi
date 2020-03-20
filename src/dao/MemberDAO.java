@@ -13,6 +13,8 @@ import javax.sql.DataSource;
 import dao.MemberDAO;
 import vo.Coupon;
 import vo.Member;
+import vo.Rating;
+import vo.Review;
 import vo.Total_view;
 
 public class MemberDAO {
@@ -38,6 +40,7 @@ public class MemberDAO {
 		this.con = con;
 	}
 
+	// 객체를 이용한 회원 리스트
 	public Member selectMember(String member_id) {
 		// TODO Auto-generated method stub
 		PreparedStatement pstmt = null;
@@ -75,6 +78,7 @@ public class MemberDAO {
 		return member;
 	}
 
+	// 회원 정보 추가
 	public int insertMember(Member member) {
 		// TODO Auto-generated method stub
 		PreparedStatement pstmt = null;
@@ -102,6 +106,7 @@ public class MemberDAO {
 		return insertCount;
 	}
 
+	// 회원 정보 수정
 	public int modMember(Member member) {
 		// TODO Auto-generated method stub
 		int modCount = 0;
@@ -131,6 +136,7 @@ public class MemberDAO {
 		return modCount;
 	}
 
+	// 회원 정보 삭제
 	public int deleteMember(String delete_id) {
 		// TODO Auto-generated method stub
 		int deleteCount = 0;
@@ -150,6 +156,7 @@ public class MemberDAO {
 		return deleteCount;
 	}
 
+	// 회원 리스트 갯수 - 검색옵션
 	public int selectCount(String searchType, String keyword) {
 		// TODO Auto-generated method stub
 		PreparedStatement pstmt = null;
@@ -186,6 +193,7 @@ public class MemberDAO {
 		return count;
 	}
 
+	// 회원 리스트 - 검색옵션
 	public ArrayList<Member> selectMemberList(int page, int limit, String searchType, String keyword) {
 		// TODO Auto-generated method stub
 		PreparedStatement pstmt = null;
@@ -207,7 +215,7 @@ public class MemberDAO {
 			sql += "member_addr like ? ";
 		}
 		sql += " limit ?,?";
-		
+
 		try {
 
 			pstmt = con.prepareStatement(sql);
@@ -233,7 +241,7 @@ public class MemberDAO {
 					memberList.add(member);
 				} while (rs.next());
 			}
-		
+
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -244,6 +252,7 @@ public class MemberDAO {
 		return memberList;
 	}
 
+	// 회원 리스트 갯수
 	public int selectCount() {
 		// TODO Auto-generated method stub
 		PreparedStatement pstmt = null;
@@ -254,7 +263,7 @@ public class MemberDAO {
 
 		try {
 			pstmt = con.prepareStatement(sql);
-			
+
 			rs = pstmt.executeQuery();
 			if (rs.next()) {
 				count = rs.getInt(1);
@@ -269,6 +278,7 @@ public class MemberDAO {
 		return count;
 	}
 
+	// 회원 리스트
 	public ArrayList<Member> selectMemberList(int page, int limit) {
 		// TODO Auto-generated method stub
 		PreparedStatement pstmt = null;
@@ -278,7 +288,7 @@ public class MemberDAO {
 		int startrow = (page - 1) * limit;
 
 		String sql = "select * from member limit ?,?";
-		
+
 		try {
 
 			pstmt = con.prepareStatement(sql);
@@ -303,7 +313,7 @@ public class MemberDAO {
 					memberList.add(member);
 				} while (rs.next());
 			}
-		
+
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -314,6 +324,7 @@ public class MemberDAO {
 		return memberList;
 	}
 
+	// 회원 적립금 리스트
 	public ArrayList<Coupon> selectmemberPointList(String searchType, String keyword, String start_date,
 			String end_date) {
 		// TODO Auto-generated method stub
@@ -321,7 +332,7 @@ public class MemberDAO {
 		ResultSet rs = null;
 		ArrayList<Coupon> memberPointList = new ArrayList<Coupon>();
 		Coupon coupon = null;
-		
+
 		String sql = "SELECT * FROM coupon c INNER JOIN member m ON c.member_id=m.member_id WHERE DATE(coupon_date) BETWEEN ? AND ? ORDER BY coupon_date DESC;";
 //		if(way.equals("payment_way")) {
 //			sql+= " payment_way=? ";
@@ -337,8 +348,9 @@ public class MemberDAO {
 			pstmt.setString(1, start_date);
 			pstmt.setString(2, end_date);
 			rs = pstmt.executeQuery();
-			while(rs.next()) {
+			while (rs.next()) {
 				coupon = new Coupon();
+				coupon.setCoupon_index(rs.getInt("coupon_index"));
 				coupon.setCoupon_date(rs.getString("coupon_date"));
 				coupon.setCoupon_content(rs.getString("coupon_content"));
 				coupon.setCoupon_price(rs.getInt("coupon_price"));
@@ -348,16 +360,17 @@ public class MemberDAO {
 				coupon.setReservation_num(rs.getInt("reservation_num"));
 				memberPointList.add(coupon);
 			}
-		}catch(Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
-		}finally {
+		} finally {
 			close(rs);
 			close(pstmt);
 		}
-		
+
 		return memberPointList;
 	}
 
+	// 회원 적립금 리스트 갯수
 	public int selectPointCount(String searchType, String keyword) {
 		// TODO Auto-generated method stub
 		PreparedStatement pstmt = null;
@@ -369,8 +382,8 @@ public class MemberDAO {
 			sql += "member_id like ? ";
 		} else if (searchType.equals("member_name")) {
 			sql += "member_name like ? ";
-		}else {
-			sql+="";
+		} else {
+			sql += "";
 		}
 
 		try {
@@ -388,6 +401,217 @@ public class MemberDAO {
 			close(pstmt);
 		}
 		return count;
+	}
+
+	// 회원 등급 리스트
+	public ArrayList<Rating> selectRatingList(int page, int limit) {
+		// TODO Auto-generated method stub
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		ArrayList<Rating> ratingList = null;
+
+		int startrow = (page - 1) * limit;
+
+		String sql = "SELECT r.member_rating, rating_payment, rating_discount, rating_content, COUNT(r.member_rating)AS rating_count FROM rating r LEFT JOIN member m ON r.member_rating=m.member_rating GROUP BY r.member_rating limit ?,?";
+
+		try {
+
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, startrow);
+			pstmt.setInt(2, limit);
+
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				ratingList = new ArrayList<Rating>();
+				do {
+					Rating rating = new Rating();
+					rating.setMember_rating(rs.getString("member_rating"));
+					rating.setRating_payment(rs.getString("rating_payment"));
+					rating.setRating_discount(rs.getString("rating_discount"));
+					rating.setRating_content(rs.getString("rating_content"));
+					rating.setRating_count(rs.getInt("rating_count"));
+					ratingList.add(rating);
+				} while (rs.next());
+			}
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		return ratingList;
+	}
+
+	// 회원 등급 리스트 갯수
+	public int selectRatingCount() {
+		// TODO Auto-generated method stub
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		int count = 0;
+
+		String sql = "select count(*) from rating";
+
+		try {
+			pstmt = con.prepareStatement(sql);
+
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				count = rs.getInt(1);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		return count;
+	}
+
+	public ArrayList<Member> selectmemberRatingList(String member_rating) {
+		// TODO Auto-generated method stub
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		ArrayList<Member> memberRatingList = null;
+
+		String sql = "SELECT * from member where member_rating=?";
+
+		try {
+
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, member_rating);
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				memberRatingList = new ArrayList<Member>();
+				do {
+					Member member = new Member();
+					member.setMember_rating(rs.getString("member_rating"));
+					member.setMember_name(rs.getString("member_name"));
+					member.setMember_id(rs.getString("member_id"));
+					memberRatingList.add(member);
+				} while (rs.next());
+			}
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		return memberRatingList;
+	}
+
+	public int modRating(Rating rating) {
+		// TODO Auto-generated method stub
+		int modCount = 0;
+		PreparedStatement pstmt = null;
+		String sql = "update rating set rating_payment=?,rating_discount=?,rating_content=? where member_rating=?";
+
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, rating.getRating_payment());
+			pstmt.setString(2, rating.getRating_discount());
+			pstmt.setString(3, rating.getRating_content());
+			pstmt.setString(4, rating.getMember_rating());
+
+			modCount = pstmt.executeUpdate();
+		} catch (Exception ex) {
+			System.out.println("boardModify 에러 : " + ex);
+		} finally {
+			close(pstmt);
+		}
+		return modCount;
+	}
+
+	public Rating selectRatingDetail(String member_rating) {
+		// TODO Auto-generated method stub
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		Rating rating = null;
+		try {
+			pstmt = con.prepareStatement(
+					"SELECT * FROM rating where member_rating=?");
+			pstmt.setString(1, member_rating);
+			rs = pstmt.executeQuery();
+
+			if (rs.next()) {
+				rating = new Rating();
+				rating.setMember_rating(rs.getString("member_rating"));
+				rating.setRating_payment(rs.getString("rating_payment"));
+				rating.setRating_discount(rs.getString("rating_discount"));
+				rating.setRating_content(rs.getString("rating_content"));
+			}
+		} catch (Exception e) {
+			System.out.println("getDetail 에러 : " + e);
+		} finally {
+			if (rs != null)
+				close(rs);
+			if (pstmt != null)
+				close(pstmt);
+		}
+		return rating;
+	}
+
+	public Coupon selectPointDetail(int coupon_index, int order_num, int reservation_num) {
+		// TODO Auto-generated method stub
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		Coupon coupon = null;
+
+		String sql = "select * from coupon c inner join ";
+		if (order_num==0) {
+			sql += "reservation r on c.reservation_num=r.reservation_num ";
+		} else {
+			sql += "order_page o on c.order_num=o.order_num ";
+		}
+		sql+="WHERE coupon_index=?";
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, coupon_index);
+			rs = pstmt.executeQuery();
+
+			if (rs.next()) {
+				coupon = new Coupon();
+				coupon.setCoupon_index(rs.getInt("coupon_index"));
+				coupon.setCoupon_date(rs.getString("coupon_date"));
+				coupon.setCoupon_price(rs.getInt("coupon_price"));
+				coupon.setMember_id(rs.getString("member_id"));
+				coupon.setOrder_num(rs.getInt("order_num"));
+				coupon.setReservation_num(rs.getInt("reservation_num"));
+				coupon.setTotal_price(rs.getInt("total_price"));
+			}
+		} catch (Exception e) {
+			System.out.println("getDetail 에러 : " + e);
+		} finally {
+			if (rs != null)
+				close(rs);
+			if (pstmt != null)
+				close(pstmt);
+		}
+		return coupon;
+	}
+
+	public int deletePoint(int coupon_index) {
+		// TODO Auto-generated method stub
+		int deleteCount = 0;
+		PreparedStatement pstmt = null;
+		String sql = "DELETE FROM coupon WHERE coupon_index=?";
+
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, coupon_index);
+
+			deleteCount = pstmt.executeUpdate();
+		} catch (Exception ex) {
+			System.out.println("boardModify 에러 : " + ex);
+		} finally {
+			close(pstmt);
+		}
+		return deleteCount;
 	}
 
 }

@@ -46,11 +46,15 @@
 						<td>적립금액</td>
 						<td>회원ID</td>
 						<td>회원명</td>
-						<td>기능</td>
+						<td></td>
+						<td></td>
 					</tr>
 				</thead>
 				<c:set var="total" value="0" />
+
 				<c:forEach items="${memberPointList }" var="pointList">
+					<input type="hidden" name="coupon_index"
+						value="${pointList.coupon_index }" />
 					<c:set var="total" value="${total+pointList.coupon_price }" />
 					<tbody>
 						<tr height="40px">
@@ -74,8 +78,19 @@
 							<td>${pointList.coupon_price }원</td>
 							<td>${pointList.member_id }</td>
 							<td>${pointList.member_name }</td>
-							<td><input type="button" value="상세보기" />
-							&nbsp;<input type="button" value="삭제" /></td>
+							<c:choose>
+								<c:when test="${pointList.coupon_content eq '신규회원 적립금' }">
+									<td>-</td>
+								</c:when>
+								<c:otherwise>
+									<td
+										onClick="window.open('pointDetail.mem?coupon_index=${pointList.coupon_index}&order_num=${pointList.order_num}&reservation_num=${pointList.reservation_num }','new','width=550px,height=500px,location=no,status=no,scrollbars=no');"><input
+										type="button" value="상세보기" /></td>
+								</c:otherwise>
+							</c:choose>
+							<td
+								onClick="location.href='pointDelete.mem?member_id=${pointList.member_id}&coupon_index=${pointList.coupon_index }'"><input
+								type="button" value="삭제" /></td>
 						</tr>
 					</tbody>
 

@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -70,7 +72,8 @@ img {
 						id="member_id" value="${question.member_id }" />${question.member_id }</td>
 				</tr>
 				<tr>
-					<td class="td_left" height="30px"><label for="question_subject">문의제목</label></td>
+					<td class="td_left" height="30px"><label
+						for="question_subject">문의제목</label></td>
 					<td class="td_right"><input type="hidden"
 						name="question_subject" id="question_subject"
 						value="${question.question_subject }" />${question.question_subject }</td>

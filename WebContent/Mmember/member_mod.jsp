@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -107,7 +109,7 @@ img {
 							${member.member_rating eq '우수회원' ? 'selected' : '' }>우수회원</option>
 						<option value="일반회원"
 							${member.member_rating eq '일반회원' ? 'selected' : '' }>일반회원</option>
-				</select> </td>
+				</select></td>
 			</tr>
 			<tr>
 				<td id="sub">생년월일</td>
@@ -134,10 +136,10 @@ img {
 			</tr>
 			<tr>
 				<td id="sub">주소</td>
-				<td colspan="3"><input type="text" style="width:300px;" name="member_addr"
-					id="member_addr" value="${member.member_addr}" /> <input
-					type="text" style="width:300px;" name="member_addr_detail" id="member_addr_detail"
-					value="${member.member_addr_detail }" /></td>
+				<td colspan="3"><input type="text" style="width: 300px;"
+					name="member_addr" id="member_addr" value="${member.member_addr}" />
+					<input type="text" style="width: 300px;" name="member_addr_detail"
+					id="member_addr_detail" value="${member.member_addr_detail }" /></td>
 
 
 			</tr>

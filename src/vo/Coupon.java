@@ -9,6 +9,24 @@ public class Coupon {
 	private int order_num;
 	private int reservation_num;
 	private String coupon_content;
+	private int coupon_index;
+	private int total_price;
+
+	public int getTotal_price() {
+		return total_price;
+	}
+
+	public void setTotal_price(int total_price) {
+		this.total_price = total_price;
+	}
+
+	public int getCoupon_index() {
+		return coupon_index;
+	}
+
+	public void setCoupon_index(int coupon_index) {
+		this.coupon_index = coupon_index;
+	}
 
 	public String getMember_id() {
 		return member_id;
@@ -65,6 +83,5 @@ public class Coupon {
 	public void setCoupon_content(String coupon_content) {
 		this.coupon_content = coupon_content;
 	}
-	
-	
+
 }

@@ -8,30 +8,31 @@ import java.util.ArrayList;
 
 import dao.MemberDAO;
 import vo.Member;
+import vo.Rating;
 
-public class MemberListSvc {
+public class MemberRatingListSvc {
 
-	public int getListCount(String searchType, String keyword) {
+	public int getListCount() {
 		// TODO Auto-generated method stub
 		Connection con = getConnection();
 		MemberDAO memberDao = MemberDAO.getInstance();
 		memberDao.setConnection(con);
 
-		int listCount = memberDao.selectCount(searchType, keyword);
+		int listCount = memberDao.selectRatingCount();
 
 		close(con);
 		return listCount;
 	}
 
-	public ArrayList<Member> getMemberList(int page, int limit, String searchType, String keyword) {
+	public ArrayList<Rating> getRatingList(int page, int limit) {
 		// TODO Auto-generated method stub
 		Connection con = getConnection();
 		MemberDAO memberDao = MemberDAO.getInstance();
 		memberDao.setConnection(con);
 
-		ArrayList<Member> memberList = memberDao.selectMemberList(page, limit, searchType, keyword);
+		ArrayList<Rating> ratingList = memberDao.selectRatingList(page, limit);
 
 		close(con);
-		return memberList;
+		return ratingList;
 	}
 }

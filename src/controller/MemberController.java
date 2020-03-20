@@ -14,7 +14,13 @@ import Mmember.action.MemberDetailAction;
 import Mmember.action.MemberListAction;
 import Mmember.action.MemberPointAction;
 import Mmember.action.MemberRatingAction;
+import Mmember.action.MemberRatingListAction;
 import Mmember.action.MmodAction;
+import Mmember.action.PointDeleteAction;
+import Mmember.action.PointDetailAction;
+import Mmember.action.RatingDeleteAction;
+import Mmember.action.RatingDetailAction;
+import Mmember.action.RatingModAction;
 import action.Action;
 import member.action.IdCheckAction;
 import member.action.MemberDelAction;
@@ -95,8 +101,8 @@ public class MemberController extends javax.servlet.http.HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}					
-		}else if (command.equals("/memberRating.mem")) {
-			action = new MemberRatingAction();
+		}else if (command.equals("/ratingList.mem")) {
+			action = new MemberRatingListAction();
 			try {
 				forward = action.execute(request, response);
 			} catch (Exception e) {
@@ -134,7 +140,50 @@ public class MemberController extends javax.servlet.http.HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}					
+		}else if (command.equals("/memberRating.mem")) {
+			action = new MemberRatingAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}					
+		}else if (command.equals("/ratingMod.mem")) {
+			action = new RatingModAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}					
+		}else if (command.equals("/ratingDetail.mem")) {
+			action = new RatingDetailAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}					
+		}else if (command.equals("/ratingDelete.mem")) {
+			action = new RatingDeleteAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}					
+		}else if (command.equals("/pointDetail.mem")) {
+			action = new PointDetailAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}					
+		}else if (command.equals("/pointDelete.mem")) {
+			action = new PointDeleteAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}					
 		}
+		
 		
 		if (forward != null) {
 
