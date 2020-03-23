@@ -14,7 +14,7 @@ public class Order {
 	private String order_status;
 	private String order_date;
 	private String payment_way;
-	private int payment_date;
+	private String payment_date;
 	private String order_way;
 	private int coupon;
 	private String demand;
@@ -24,7 +24,7 @@ public class Order {
 	private int product_quantity;
 
 	public Order(int order_num, String member_id, int total_price, String order_status, String order_date,
-			String payment_way, int payment_date, String order_way, String demand, String payment_status, int coupon,
+			String payment_way, String payment_date, String order_way, String demand, String payment_status, int coupon,
 			String confirm, String product_name, int product_quantity) {
 		// TODO Auto-generated constructor stub
 		this.order_num = order_num;
@@ -151,11 +151,11 @@ public class Order {
 		this.payment_way = payment_way;
 	}
 
-	public int getPayment_date() {
+	public String getPayment_date() {
 		return payment_date;
 	}
 
-	public void setPayment_date(int payment_date) {
+	public void setPayment_date(String payment_date) {
 		this.payment_date = payment_date;
 	}
 

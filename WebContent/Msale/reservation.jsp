@@ -135,7 +135,7 @@
 								<td
 									style="${reservation.payment_status eq '결제완료' ? 'background-color : lightgray' : 'border : solid 1px pink'  };">${reservation.payment_status }</td>
 								<td
-									style="${reservation.reservation_status eq '예약완료' ? 'background-color : lightgray' : 'border : solid 1px pink'  };">${reservation.reservation_status }</td>
+									style="${reservation.reservation_status eq '수령완료' ? 'background-color : lightgray' : 'border : solid 1px pink'  };">${reservation.reservation_status }</td>
 							</tr>
 						</tbody>
 					</c:forEach>

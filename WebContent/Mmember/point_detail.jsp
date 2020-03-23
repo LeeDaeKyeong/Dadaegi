@@ -79,42 +79,35 @@ img {
 		<table>
 			<tr>
 				<td id="sub">적립금 번호</td>
-				<td colspan="3"><input type="text" name="coupon_index"
-					id="coupon_index" value="${coupon.coupon_index }" /></td>
+				<td colspan="3">${coupon.coupon_index }</td>
 			</tr>
 			<tr>
 				<td id="sub">회원 아이디</td>
-				<td colspan="3"><input type="text" name="member_id"
-					id="member_id" value="${coupon.member_id }" /></td>
+				<td colspan="3">${coupon.member_id }</td>
 			</tr>
 			<tr>
 				<td id="sub">적립 일자</td>
-				<td colspan="3"><input type="text" name="coupon_date"
-					id="coupon_date" value="${coupon.coupon_date }" /></td>
+				<td colspan="3">${coupon.coupon_date }</td>
 			</tr>
 			<tr>
 				<c:choose>
 					<c:when test="${coupon.order_num eq 0 }">
 						<td id="sub">예약번호</td>
-						<td colspan="3"><input type="text" name="reservation_num"
-							id="reservation_num" value="${coupon.reservation_num }" /></td>
+						<td colspan="3">${coupon.reservation_num }</td>
 					</c:when>
 					<c:otherwise>
 						<td id="sub">주문번호</td>
-						<td colspan="3"><input type="text" name="order_num"
-							id="order_num" value="${coupon.order_num }" /></td>
+						<td colspan="3">${coupon.order_num }</td>
 					</c:otherwise>
 				</c:choose>
 			</tr>
 			<tr>
 				<td id="sub">주문금액</td>
-				<td colspan="3"><input type="text" name="total_price"
-					id="total_price" value="${coupon.total_price }" /></td>
+				<td colspan="3">${coupon.total_price }</td>
 			</tr>
 			<tr>
 				<td id="sub">적립금액</td>
-				<td colspan="3"><input type="text" name="coupon_price"
-					id="coupon_price" value="${coupon.coupon_price }" /></td>
+				<td colspan="3">${coupon.coupon_price }</td>
 			</tr>
 		</table>
 		<section id="commandCell">

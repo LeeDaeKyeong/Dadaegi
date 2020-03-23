@@ -128,6 +128,8 @@ img {
 							${reservationDetailList.get(0).reservation_status eq '예약완료' ? 'selected' : '' }>예약완료</option>
 						<option value="예약취소"
 							${reservationDetailList.get(0).reservation_status eq '예약취소' ? 'selected' : '' }>예약취소</option>
+						<option value="수령완료"
+							${reservationDetailList.get(0).reservation_status eq '수령완료' ? 'selected' : '' }>수령완료</option>
 				</select><input type="submit" value="예약 수정"></td>
 			</tr>
 			<tr>

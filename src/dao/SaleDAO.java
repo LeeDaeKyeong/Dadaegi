@@ -183,7 +183,7 @@ public class SaleDAO {
 					order.setOrder_status(rs.getString("order_status"));
 					order.setOrder_date(rs.getString("order_date"));
 					order.setPayment_way(rs.getString("payment_way"));
-					order.setPayment_date(rs.getInt("payment_date"));
+					order.setPayment_date(rs.getString("payment_date"));
 					order.setOrder_way(rs.getString("order_way"));
 					order.setDemand(rs.getString("demand"));
 					order.setPayment_status(rs.getString("payment_status"));
