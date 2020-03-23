@@ -3,6 +3,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="vo.Cup"%>
 <%@ page import="java.util.*"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 
 <!DOCTYPE html>
 <html>
@@ -16,7 +18,7 @@ table {
 	border-collapse: collapse;
 }
 
-.aa th, td {
+.aa td {
 	border-bottom: 1px solid #444444;
 	padding: 2px;
 }
@@ -26,6 +28,21 @@ table {
 }
 </style>
 <script>
+function depointf(f,v,t){
+	var depoint = f.depoint.value;
+	if(isNaN(depoint)){
+		alert('잘못 입력하셨습니다.');
+		f.depoint.value="";
+		f.depoint.focus();
+	}else if(parseInt(depoint)>parseInt(v)){
+		alert('사용 가능 포인트 초과');
+		f.depoint.value="";
+		f.depoint.focus();
+	}else{
+		document.getElementById("usepoint").innerHTML = depoint;
+		document.getElementById("allprice").innerHTML = parseInt(f.totalMoney.value)-parseInt(depoint);
+	}
+}
 	function sample6_execDaumPostcode() {
 		new daum.Postcode(
 				{
@@ -102,6 +119,12 @@ table {
 								type="hidden" id="od_item_name" name="od_item_name"
 								value="${cup.product_name }"> <input type="hidden"
 								id="od_price" name="od_price" value="${cup.product_price }">
+								<input type="hidden" id="order_num" name="order_num" value="${order_page.order_num }" >
+								
+								<jsp:useBean id="toDay" class="java.util.Date" />
+								<fmt:formatDate value='${toDay}' pattern='yyyy-MM-dd' var="nowDate"/>
+								<input type="hidden" id="payment_date" name="payment_date" value="${toDay }" >
+								<input type="hidden" id="payment_status" name="payment_status" value="주문완료" >
 							</td>
 						</tr>
 					</table>
@@ -112,14 +135,14 @@ table {
 						<b id="grade_deco">|</b>포인트 사용
 					</div>
 					<div id="point" style="background-color: #fff; padding: 10px;">
-						사용 가능 포인트 <b>1032</b> 점 중 <input type="text" id="depoint"
-							name="depoint" size="5" value="0" />
+						사용 가능 포인트 <b>1032</b> 점 중 <input type="text" id="coupon"
+							name="coupon" size="5" value="0" />
 						<button type="button" onClick="depointf(this.form,1032)"
 							id="wbutton">사용</button>
 					</div>
 					<p class="right">
 						<font size="3em">총 &nbsp;${(param.product_price)*(param.product_quantity) }원</font><br>
-						<input type="hidden" id="totalMoney" name="totalMoney"
+						<input type="hidden" id="total_price" name="total_price"
 							value="12000"> <font size="2em">포인트 사용 <font
 							color="red" id="usepoint"></font>원
 						</font><br> <br> <font size="4em"><b>총 결제금액 <b
@@ -170,6 +193,10 @@ table {
 								src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 						</td>
 					</tr>
+					<tr>
+						<td id="td_left"><label for="userID">추가 요구사항</label></td>
+						<td><input type="text" id="demand" name="demand" size="50"></td>
+					</tr>
 				</table>
 
 
@@ -185,7 +212,10 @@ table {
 					<input type="radio" name="payment" value="신용카드">&nbsp;신용카드&nbsp;
 					<hr color="#F5A9A9">
 				</div>
+				
+				
 				<br> <br>
+				<a href="javascript:orderform.submit()">결제</a>
 				<button id="bbutton" type="submit">결제</button>
 				<button id="sbutton" type="button" onclick="location.href='cupCartList.cup'">돌아가기</button>
 			</form>

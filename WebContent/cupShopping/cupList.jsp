@@ -39,7 +39,7 @@ table {
 	width: 150px;
 	height: 150px;
 	border: none;
-	margin-right: 20px;
+
 }
 
 #todayImage {
@@ -47,6 +47,7 @@ table {
 	height: 100px;
 	border: none;
 }
+
 </style>
 </head>
 <body>
@@ -59,11 +60,11 @@ table {
 			<table>
 				<tr>
 					<c:forEach var="cup" items="${cupList }" varStatus="status">
-						<td>
+						<td align="center">
 						<a href="cupView.cup?cup_index=${cup.cup_index }"> 
 						<img src="${pageContext.request.contextPath }/images/${cup.product_image }" id="productImage" />
 						</a> <br>
-						상품명:${cup.product_name }<br> 가격:${cup.product_price }<br>
+						${cup.product_name }<br> 가격:${cup.product_price }<br>
 						</td>
 						<c:if test="${((status.index+1) mod 4) == 0 }">
 						</tr>

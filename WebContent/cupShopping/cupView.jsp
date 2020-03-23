@@ -5,7 +5,6 @@
 <%@ page import="vo.Order_detail"%>
 <%@ page import="java.util.*"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,74 +12,59 @@
 <title>Insert title here</title>
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script>
-	var count1 = 0;
-
-	function show_content1(v) {
-		var name = "re_content" + v;
-		var name2 = "rere_content" + v;
-		if (document.getElementById(name).style.display == "none") {
-			document.getElementById(name).style.display = "table-row";
-			if (document.getElementById(name2) != null)
-				document.getElementById(name2).style.display = "table-row";
-			count1++;
-			return;
-		} else if (document.getElementById(name).style.display == "table-row") {
-			document.getElementById(name).style.display = "none";
-			if (document.getElementById(name2) != null)
-				document.getElementById(name2).style.display = "none";
-			count1--;
-			return;
-		}
-
-	}
-
 	function check() {
-		var form = document.form1;
+		var formRa = document.form;
 		//첫번째 라디오 버튼을 선택한 경우
-		if (form.way[0].checked == true) {
+		if (formRa.way[0].checked == true) {
 			//현재 폼의 action 값을 menu_1.html이라는 파일로 만든다
-			form.action = "cupDirectOrder.cup";
+			formRa.action = "cupDirectOrder.cup";
 		}
 		//두번째 라디오 버튼을 선택한 경우
-		else if (form.way[1].checked == true) {
-			form.action = "cupDirectOrder.cup";
+		else if (formRa.way[1].checked == true) {
+			formRa.action = "cupDirectOrder.cup";
 		} else {
-			form.action = "#";
+			formRa.action = "#";
 		}
-		form.submit();
-	}
-	
-	function goto_url(act) {
-		document.itemform.action = act;
-		var product_quantity = document.getElementById("product_quantity").value;
-		var stock = document.getElementById("stock").value;
-		var reg_qty = /^[1-9]{1}$|^[1-4]{1}[0-9]{1}$|^50$/;
-		if (!reg_qty.test(product_quantity)) {
-			alert("1~50의 숫자만 가능합니다.");
-			document.product_quantity.value="";
-			document.product_quantity.focus();
-			return false;
-		}
-		if (parseInt(product_quantity)>parseInt(stock)) {
-			alert("주문 가능 개수 초과\n"+stock+"개 이하 주문가능");
-			document.product_quantity.value="";
-			document.product_quantity.focus();
-			return false;
-		}
-		document.itemform.submit();
+		formRa.submit();
 	}
 
-var qnt;
-function qnt(f) {
-	qnt = $('#product_quantity').val();
-//	alert(qnt);
-}
+	var product_price;
+	var product_quantity;
 
-function cart() {
-//	alert(qnt);
-	location.href="cupCartAdd.cup?cup_index=${cup.cup_index }&product_quantity="+qnt;
-	
-}
+	function init() {
+		product_price = document.form.product_price.value;
+		product_quantity = document.form.product_quantity.value;
+		document.form.sum.value = product_price;
+		change();
+	}
+
+	function add() {
+		hm = document.form.product_quantity;
+		sum = document.form.sum;
+		hm.value++;
+
+		sum.value = parseInt(hm.value) * product_price;
+	}
+
+	function del() {
+		hm = document.form.product_quantity;
+		sum = document.form.sum;
+		if (hm.value > 1) {
+			hm.value--;
+			sum.value = parseInt(hm.value) * product_price;
+		}
+	}
+
+	function change() {
+		hm = document.form.product_quantity;
+		sum = document.form.sum;
+
+		if (hm.value < 0) {
+			hm.value = 0;
+		}
+		sum.value = parseInt(hm.value) * product_price;
+	}
+
 </script>
 <style type="text/css">
 #listForm {
@@ -114,10 +98,6 @@ img {
 	float: left;
 }
 
-#commandList {
-	text-align: center;
-}
-
 #desc {
 	height: 170px;
 	background: #F5A9A9;
@@ -126,11 +106,17 @@ img {
 h3 {
 	text-align: left;
 }
+
+#tr_top {
+	background: #F5A9A9;
+	text-align: center;
+}
+
 </style>
 </head>
-<body>
+<body onload="init();">
 	<section id="listForm">
-		<h2>${cup.product_name }의 상세정보</h2>
+		<h2>${cup.product_name }</h2>
 
 		<section id="content_main">
 			<section id="content_left">
@@ -138,64 +124,63 @@ h3 {
 					src="${pageContext.request.contextPath }/images/${cup.product_image }" />
 			</section>
 			<section id="content_right">
-				<br>
-				<br> <b>상품명 : </b>${cup.product_name }<br>
-				<br> <b>가격 : </b>${cup.product_price }원<br>
-				<br>
+				<br> <b>상품명 : </b>${cup.product_name }<br> <br>
+				<b>가격 : </b>${cup.product_price }원<br> <br>
 				<hr align="center" width="250px">
-				<br> 
-				
-				<form action="${pageContext.request.contextPath }/cupDirectOrder.cup"
-					name="form1" method="post">
-				<b>수량 : </b><input type="text" id="product_quantity"
-					name="product_quantity" onchange="qnt(this)" size="1" value="1" />개<br>
-					
 				<br>
-				
-					<input type="radio" name="way" value="online" checked="checked">딜리버리
-					<input type="radio" name="way" value="offline">현장수령 
-					<input type="radio" name="way" value="reservation">예약주문
-					 
-					<input type="hidden" name="product_name" value="${cup.product_name }" />
-					<input type="hidden" name="product_price" value="${cup.product_price }" /> 
-					<input type="hidden" name="product_quantity" value="${order_detail.product_price }" />
-						
+
+				<form name="form" method="get">
+
+					수량 : <input type=hidden name="product_price"
+						value="${cup.product_price }"> <input type="text"
+						name="product_quantity" value="1" size="3" onchange="change();">
+					<input type="button" value=" + " onclick="add();"> <input
+						type="button" value=" - " onclick="del();"><br> 금액 :
+					<input type="text" name="sum" size="11" readonly>원 <br>
+					<br> 
+					<input type="hidden" name="product_name" value="${cup.product_name }" /> 
+					<a href="javascript:form.action='${pageContext.request.contextPath }/cupCartAdd.cup?cup_index=${cup.cup_index }';form.submit()"
+					style="color: white; font-size: 1.3em; font-weight: bold; background: #FFA7A7;">장바구니</a>&nbsp;&nbsp;
+					<a href="cupList.cup" style="color: white; font-size: 1.3em; font-weight: bold; background: #FFA7A7;">쇼핑 계속하기</a>
+
 					<hr align="center" width="250px">
-
-					
-				</form>
-				
-				<form action="${pageContext.request.contextPath }/cupCartList.cup" name="form2" method="post">
-					<input type="hidden" id="product_quantity" name="product_quantity" value="${product_quantity}" />
-					<a href="javascript:void(0);" onclick="cart()">장바구니</a>&nbsp;&nbsp;
+					<input type="radio" name="way" value="online" checked="checked">딜리버리
+					<input type="radio" name="way" value="offline">현장수령 <input
+						type="radio" name="way" value="reservation">예약주문 <br>
+					<a href="javascript:check()"
+						style="color: white; font-size: 1.3em; font-weight: bold; background: #FFA7A7;">바로구매</a><br>
 				</form>
 
-				<nav id="commandList">					
-					<a href="javascript:check()">바로구매</a><br>
-					<a href="cupList.cup">쇼핑 계속하기</a>
-				</nav>
+
 			</section>
 		</section>
 
 		<p id="desc">
-			<b>상품안내 : </b><br>${cup.product_content }<br>
-		<div class="review" id="reboard">
-			<h3>&nbsp;&nbsp;상품문의</h3>
-			<div id="commandCell" align="right">
-				<button type="button" id="wbutton"
-					onclick="window.open('./question/questionWriteForm.qu?item_code=V006','','width=500, height=400')">문의하기</button>
-			</div>
-
-
+			<b>상품안내 </b><br>${cup.product_content }<br>
+		<h3>상품문의</h3>
+		<div id="commandCell" align="right">
+			<button type="button" id="wbutton"
+				onclick="window.open('./question/questionWriteForm.qu?item_code=V006','','width=500, height=400')">문의하기</button>
 		</div>
 
-		<h3>&nbsp;&nbsp;상품후기</h3>
+		<table cellspacing="0" cellpadding="0">
+			<tr id="tr_top" height="20px">
+				<td width="50px">번호</td>
+				<td width="200px">제목</td>
+				<td width="100px">작성자</td>
+				<td width="100px">작성일</td>
+				<td>조회수</td>
+			</tr>
+			<tr>
+
+			</tr>
+		</table>
+
+		<h3>상품후기</h3>
 		<div id="commandCell" align="right">
 			<button type="button" id="wbutton"
 				onclick="window.open('./question/questionWriteForm.qu?item_code=V006','','width=500, height=400')">후기쓰기</button>
 		</div>
-
-
 
 	</section>
 </body>

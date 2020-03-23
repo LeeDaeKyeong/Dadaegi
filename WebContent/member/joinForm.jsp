@@ -13,9 +13,38 @@ table {
 	text-align: center;
 }
 
-.td_title {
+table.type02 {
+	border-collapse: separate;
+	border-spacing: 0;
+	line-height: 1.5;
+	border-top: 1px solid #ccc;
+	border-left: 1px solid #ccc;
+	margin: 20px 10px;
+}
+
+table.type02 th {
+	text-align: center;
+	width: 150px;
+	padding: 10px;
 	font-weight: bold;
-	font-size: x-large;
+	vertical-align: top;
+	border-right: 1px solid #ccc;
+	border-bottom: 1px solid #ccc;
+	border-top: 1px solid #fff;
+	border-left: 1px solid #fff;
+	background: #F5A9A9;
+}
+
+table.type02 td {
+	width: 350px;
+	padding: 10px;
+	vertical-align: top;
+	border-right: 1px solid #ccc;
+	border-bottom: 1px solid #ccc;
+}
+
+h1 {
+	text-align: left;
 }
 </style>
 </head>
@@ -91,53 +120,51 @@ function chkForm(f){
 	}
 </script>
 <body>
+<h1>회원 가입</h1>
 	<form name="joinform" action="memberJoinProcess.mem" method="post"
 		onsubmit="return chkForm(this);">
-		<table border=1>
+		<table class="type02">
 			<tr>
-				<td colspan="2" class="td_title">회원 가입 페이지</td>
-			</tr>
-			<tr>
-				<td><label for="member_id">아이디 : </label></td>
+				<th><label for="member_id">아이디 : </label></th>
 				<td align=left><input type="text" name="member_id" id="member_id" required />
 				<input type="button" name="idCheck" value="아이디 중복확인" id="idCheck"
 				onclick="window.open('idCheck.mem?openInit=true','','width=300,height=200')"/>
 				</td>
 			</tr>
 			<tr>
-				<td><label for="member_pw">비밀번호</label></td>
+				<th><label for="member_pw">비밀번호</label></th>
 				<td align=left><input type="password" name="member_pw" size="10"
 					id="member_pw" /></td>
 			</tr>
 			<tr>
-				<td><label for="name">이름</label></td>
+				<th><label for="name">이름</label></th>
 				<td align=left><input type="text" name="member_name" size="10"
 					id="member_name" /></td>
 			</tr>
 			<tr>
-				<td><label for="name">전화번호</label></td>
+				<th><label for="name">전화번호</label></th>
 				<td align=left><input type="text" name="member_phone" size="12"
 					id="member_phone" /></td>
 			</tr>
 			<tr>
-				<td><label for="name">생년월일</label></td>
+				<th><label for="name">생년월일</label></th>
 				<td align=left><input type="text" name="member_birth" size="12"
 					id="member_birth" /></td>
 			</tr>
 			<tr>
-				<td><label for="gender1"></label>성별</td>
+				<th><label for="gender1"></label>성별</th>
 				<td align=left><input type="radio" name="member_gender"
 					value="남" id="member_gender" />남자 <input type="radio"
 					name="member_gender" value="여" checked id="member_gender" />여자</td>
 			</tr>
 			<tr>
-				<td><label for="email">이메일 주소</label></td>
+				<th><label for="email">이메일 주소</label></th>
 				<td align=left><input type="text" name="member_email"
 					id="member_email" /></td>
 			</tr>
 
 			<tr>
-				<td rowspan="3" id="td_left"><label for="userID">주소</label></td>
+				<th rowspan="3" id="td_left"><label for="userID">주소</label></th>
 				<td align=left><input type="text" name="member_zip" id="member_zip"
 					size="7" />
 					<button type="button" onclick="sample6_execDaumPostcode()"
@@ -156,8 +183,8 @@ function chkForm(f){
 
 
 			<tr>
-				<td colspan="2"><a href="javascript:joinform.submit()">회원가입</a>&nbsp;&nbsp;
-					<a href="javascript:joinform.reset()">다시작성</a></td>
+				<td colspan="2"><a href="javascript:joinform.submit()" style="color: black; font-size: 1.3em; font-weight: bold;">회원가입</a>&nbsp;&nbsp;
+					<a href="javascript:joinform.reset()" style="color: black; font-size: 1.3em; font-weight: bold;">다시작성</a></td>
 			</tr>
 		</table>
 	</form>

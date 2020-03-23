@@ -17,26 +17,28 @@ table {
 	font-weight: bold;
 	font-size: x-large;
 }
+
+
 </style>
 </head>
 <body>
 	<form name="loginform" action="login.log" method="post">
-		<table>
+		<table><br>
 			<tr>
-				<td colspan="2" class="td_title">로그인 페이지</td>
+				<td colspan="2" class="td_title">LOGIN</td>
 			</tr>
 			<tr>
-				<td><label for="id">아이디 : </label></td>
+				<td><label for="id">아이디</label></td>
 				<td><input type="text" name="member_id" id="member_id" /></td>
 			</tr>
 			<tr>
-				<td><label for="pass">비밀번호 : </label></td>
+				<td><label for="pass">비밀번호</label></td>
 				<td><input type="password" name="member_pw" id="member_pw" /></td>
 			</tr>
 			<tr>
 				<td colspan="2">
-				<a href="javascript:loginform.submit()">로그인</a>&nbsp;&nbsp;
-				<a href="joinForm.mem">회원가입</a></td>
+				<a href="javascript:loginform.submit()" style="color: black; font-size: 1.3em; font-weight: bold;">로그인</a>&nbsp;&nbsp;
+				<a href="joinForm.mem" style="color: black; font-size: 1.3em; font-weight: bold;">회원가입</a></td>
 			</tr>
 		</table>
 	</form>

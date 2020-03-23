@@ -14,7 +14,7 @@ ul {
 .sidemanu>ul>li {
 	display: inline-block;
 	/*float: left;*/
-	width: 130px;
+	width: 200px;
 	height: 40px;
 	margin-top: 0;
 	position: relative;
@@ -22,9 +22,9 @@ ul {
 .sidemanu>ul>li>a {
 	text-decoration:none;
 	display: block;
-	width: 120px;
+	width: 150px;
 	height: 100%;
-	font: bold 30px/30px "맑은 고딕", arial;
+	font: 30px/30px "나눔고딕", arial;
 	text-align: center;
 	color: #8A2908;
 	background: #ffffff;
@@ -47,14 +47,14 @@ ul {
 		}
 		setInterval(changeImage, 3000);
 	</script>
-	<hr>
+	<hr style="width:800px;">
 	<div class="sidemanu">
 		<ul>
 			<li><a href="#"><img src="images/review.jpg">
-			<br>오프라인 주문</a></li>
+			<br>비회원</a></li>
 			<li><a href="#"><img src="images/online.jpg">
-			<br>온라인 주문</a></li>
-			<li><a href="#"><img src="images/map.jpg">
+			<br>빠른 구매</a></li>
+			<li><a href="map.cup"><img src="images/map.jpg">
 			<br>오시는 길</a></li>
 		</ul>
 	</div>

@@ -10,6 +10,7 @@ import java.util.ArrayList;
 
 import dao.CupDAO;
 import vo.Cup;
+import vo.Order_page;
 import vo.Reservation;
 
 public class CupDAO {
@@ -64,15 +65,15 @@ public class CupDAO {
 	}
 
 
-	public Cup selectCup(int id, int qnt) {
+	public Cup selectCup(int cup_index, int product_quantity) {
 		// TODO Auto-generated method stub
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		Cup cup = null;
 
 		try {
-			pstmt = con.prepareStatement("SELECT * FROM order_detail od INNER JOIN cup c ON od.product_code = c.product_code WHERE cup_index=?");
-			pstmt.setInt(1, id);
+			pstmt = con.prepareStatement("SELECT * FROM cart a INNER JOIN cup c ON a.product_code = c.product_code WHERE cup_index=?");
+			pstmt.setInt(1, cup_index);
 			rs = pstmt.executeQuery();
 
 			if (rs.next()) {
@@ -166,6 +167,33 @@ public class CupDAO {
 		}
 		
 		return cup;
+	}
+
+	public int insertOrderPage(Order_page order_page) {
+		// TODO Auto-generated method stub
+		PreparedStatement pstmt = null;
+		int insertOrder = 0;
+		try {
+			pstmt=con.prepareStatement("INSERT INTO order_page(order_num,member_id,total_price,order_status,order_date,payment_way,payment_date,order_way,coupon,demand,payment_status) VALUES (?,?,?,?,?,?,?,?,?,?,?)");
+			pstmt.setInt(1, order_page.getOrder_num());
+			pstmt.setString(2, order_page.getMember_id());
+			pstmt.setInt(3, order_page.getTotal_price());
+			pstmt.setString(4, order_page.getOrder_status());
+			pstmt.setString(5, order_page.getOrder_date());
+			pstmt.setString(6, order_page.getPayment_way());
+			pstmt.setString(7, order_page.getPayment_date());
+			pstmt.setString(8, order_page.getOrder_way());
+			pstmt.setInt(9, order_page.getCoupon());
+			pstmt.setString(10, order_page.getDemand());
+			pstmt.setString(11, order_page.getPayment_status());
+			
+			insertOrder = pstmt.executeUpdate();		
+		}catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return insertOrder;
 	}
 
 }

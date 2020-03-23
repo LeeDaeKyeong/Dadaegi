@@ -20,6 +20,20 @@ table {
 	background-color: #F5A9A9;
 }
 </style>
+
+<script>
+function div_OnOff(v,id){
+ // 라디오 버튼 value 값 조건 비교
+ if(v == "3"){
+  document.getElementById(id).style.display = ""; // 보여줌
+ }else{
+  document.getElementById(id).style.display = "none"; // 숨김
+ }
+}
+</script>
+
+
+
 <body>
 	<div class="pageform">
 		<h3>&nbsp;&nbsp;결제</h3>
@@ -80,6 +94,30 @@ table {
 						</b></font>
 					</p>
 				</div>
+				
+				
+				
+				
+				
+				<div id="grade">
+						<b id="grade_deco">|</b>수령방법
+					</div>
+	<table>
+		<form name="form1" method="post">
+			<input type="radio" name="way" value="online" onclick="div_OnOff(this.value,'con');" checked="checked">딜리버리 <input
+				type="radio" name="way" value="offline" onclick="div_OnOff(this.value,'con');">현장수령 <input
+				type="radio" name="way" value="reservation" onclick="div_OnOff(this.value,'con');">예약주문
+		
+		<div id="con" style="display:none">
+			내용
+		</div>
+		</form>
+
+	</table>
+				
+				
+				
+				
 				
 				
 				

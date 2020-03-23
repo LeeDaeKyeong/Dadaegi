@@ -532,8 +532,7 @@ public class MemberDAO {
 		ResultSet rs = null;
 		Rating rating = null;
 		try {
-			pstmt = con.prepareStatement(
-					"SELECT * FROM rating where member_rating=?");
+			pstmt = con.prepareStatement("SELECT * FROM rating where member_rating=?");
 			pstmt.setString(1, member_rating);
 			rs = pstmt.executeQuery();
 
@@ -562,13 +561,13 @@ public class MemberDAO {
 		Coupon coupon = null;
 
 		String sql = "select * from coupon c inner join ";
-		if (order_num==0) {
+		if (order_num == 0) {
 			sql += "reservation r on c.reservation_num=r.reservation_num ";
 		} else {
 			sql += "order_page o on c.order_num=o.order_num ";
 		}
-		sql+="WHERE coupon_index=?";
-		
+		sql += "WHERE coupon_index=?";
+
 		try {
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, coupon_index);
@@ -614,4 +613,38 @@ public class MemberDAO {
 		return deleteCount;
 	}
 
+	public ArrayList<Coupon> selectPointSearch(String start_date, String end_date, String member_id) {
+		// TODO Auto-generated method stub
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		ArrayList<Coupon> pointSearch = new ArrayList<Coupon>();
+		Coupon coupon = null;
+
+		String sql = "SELECT * FROM coupon WHERE DATE(coupon_date) BETWEEN ? AND ? AND member_id=? ORDER BY coupon_date DESC;";
+
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, start_date);
+			pstmt.setString(2, end_date);
+			pstmt.setString(3, member_id);
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				coupon = new Coupon();
+				coupon.setOrder_num(rs.getInt("order_num"));
+				coupon.setCoupon_content(rs.getString("coupon_content"));
+				coupon.setInout_coupon(rs.getString("inout_coupon"));
+				coupon.setCoupon_price(rs.getInt("coupon_price"));
+				coupon.setCoupon_date(rs.getString("coupon_date"));
+				coupon.setMember_id(rs.getString("member_id"));
+				pointSearch.add(coupon);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+
+		return pointSearch;
+	}
 }

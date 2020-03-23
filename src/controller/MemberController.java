@@ -28,6 +28,7 @@ import member.action.MemberInfoAction;
 import member.action.MemberJoinProAction;
 import member.action.MemberModAction;
 import member.action.MemberModProAction;
+import member.action.PointSearchAction;
 import action.ActionForward;
 
 /**
@@ -50,7 +51,7 @@ public class MemberController extends javax.servlet.http.HttpServlet {
 //    	System.out.println(command);
 		if (command.equals("/joinForm.mem")) {
 			forward = new ActionForward();
-			request.setAttribute("pagefile", "member/joinForm.jsp");	
+			request.setAttribute("pagefile", "member/joinForm.jsp");
 			forward.setPath("/template.jsp");
 		} else if (command.equals("/memberJoinProcess.mem")) {
 			action = new MemberJoinProAction();
@@ -60,7 +61,7 @@ public class MemberController extends javax.servlet.http.HttpServlet {
 				e.printStackTrace();
 			}
 		} else if (command.equals("/memberInfo.mem")) {
-			action = new MemberInfoAction();	
+			action = new MemberInfoAction();
 			try {
 				forward = action.execute(request, response);
 			} catch (Exception e) {
@@ -72,119 +73,129 @@ public class MemberController extends javax.servlet.http.HttpServlet {
 				forward = action.execute(request, response);
 			} catch (Exception e) {
 				e.printStackTrace();
-			}					
-		}else if (command.equals("/memberModPro.mem")) {
+			}
+		} else if (command.equals("/memberModPro.mem")) {
 			action = new MemberModProAction();
 			try {
 				forward = action.execute(request, response);
 			} catch (Exception e) {
 				e.printStackTrace();
-			}					
-		}else if (command.equals("/memberDelete.mem")) {
+			}
+		} else if (command.equals("/memberDelete.mem")) {
 			action = new MemberDelAction();
 			try {
 				forward = action.execute(request, response);
 			} catch (Exception e) {
 				e.printStackTrace();
-			}					
-		}else if (command.equals("/idCheck.mem")) {
+			}
+		} else if (command.equals("/idCheck.mem")) {
 			action = new IdCheckAction();
 			try {
 				forward = action.execute(request, response);
 			} catch (Exception e) {
 				e.printStackTrace();
-			}					
-		}else if (command.equals("/memberList.mem")) {
+			}
+		} else if (command.equals("/memberList.mem")) {
 			action = new MemberListAction();
 			try {
 				forward = action.execute(request, response);
 			} catch (Exception e) {
 				e.printStackTrace();
-			}					
-		}else if (command.equals("/ratingList.mem")) {
+			}
+		} else if (command.equals("/ratingList.mem")) {
 			action = new MemberRatingListAction();
 			try {
 				forward = action.execute(request, response);
 			} catch (Exception e) {
 				e.printStackTrace();
-			}					
-		}else if (command.equals("/memberPoint.mem")) {
+			}
+		} else if (command.equals("/memberPoint.mem")) {
 			action = new MemberPointAction();
 			try {
 				forward = action.execute(request, response);
 			} catch (Exception e) {
 				e.printStackTrace();
-			}					
-		}else if (command.equals("/pointList.mem")) {
+			}
+		} else if (command.equals("/pointList.mem")) {
 			forward = new ActionForward();
-    		request.setAttribute("pagefile", "Mmember/member_point.jsp");
-    		forward.setPath("Mtemplate.jsp");
-		}else if (command.equals("/memberDetail.mem")) {
+			request.setAttribute("pagefile", "Mmember/member_point.jsp");
+			forward.setPath("Mtemplate.jsp");
+		} else if (command.equals("/memberDetail.mem")) {
 			action = new MemberDetailAction();
 			try {
 				forward = action.execute(request, response);
 			} catch (Exception e) {
 				e.printStackTrace();
-			}	
-		}else if (command.equals("/Mmod.mem")) {
+			}
+		} else if (command.equals("/Mmod.mem")) {
 			action = new MmodAction();
 			try {
 				forward = action.execute(request, response);
 			} catch (Exception e) {
 				e.printStackTrace();
-			}					
-		}else if (command.equals("/Mdelete.mem")) {
+			}
+		} else if (command.equals("/Mdelete.mem")) {
 			action = new MdeleteAction();
 			try {
 				forward = action.execute(request, response);
 			} catch (Exception e) {
 				e.printStackTrace();
-			}					
-		}else if (command.equals("/memberRating.mem")) {
+			}
+		} else if (command.equals("/memberRating.mem")) {
 			action = new MemberRatingAction();
 			try {
 				forward = action.execute(request, response);
 			} catch (Exception e) {
 				e.printStackTrace();
-			}					
-		}else if (command.equals("/ratingMod.mem")) {
+			}
+		} else if (command.equals("/ratingMod.mem")) {
 			action = new RatingModAction();
 			try {
 				forward = action.execute(request, response);
 			} catch (Exception e) {
 				e.printStackTrace();
-			}					
-		}else if (command.equals("/ratingDetail.mem")) {
+			}
+		} else if (command.equals("/ratingDetail.mem")) {
 			action = new RatingDetailAction();
 			try {
 				forward = action.execute(request, response);
 			} catch (Exception e) {
 				e.printStackTrace();
-			}					
-		}else if (command.equals("/ratingDelete.mem")) {
+			}
+		} else if (command.equals("/ratingDelete.mem")) {
 			action = new RatingDeleteAction();
 			try {
 				forward = action.execute(request, response);
 			} catch (Exception e) {
 				e.printStackTrace();
-			}					
-		}else if (command.equals("/pointDetail.mem")) {
+			}
+		} else if (command.equals("/pointDetail.mem")) {
 			action = new PointDetailAction();
 			try {
 				forward = action.execute(request, response);
 			} catch (Exception e) {
 				e.printStackTrace();
-			}					
-		}else if (command.equals("/pointDelete.mem")) {
+			}
+		} else if (command.equals("/pointDelete.mem")) {
 			action = new PointDeleteAction();
 			try {
 				forward = action.execute(request, response);
 			} catch (Exception e) {
 				e.printStackTrace();
-			}					
+			}
+		} else if (command.equals("/memberPoint.mem")) { // memberInfoForm에서 자세히 버튼 누를때 실행
+			forward = new ActionForward();
+			request.setAttribute("pagefile", "member/memberPoint.jsp");
+			forward.setPath("/template.jsp");
+		} else if (command.equals("/pointSearch.mem")) { // 포인트 날짜 검색 버튼 누를때 실행
+			action = new PointSearchAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
-		
-		
+
 		if (forward != null) {
 
 			if (forward.isRedirect()) {

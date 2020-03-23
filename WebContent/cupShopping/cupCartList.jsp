@@ -106,102 +106,6 @@ table {
 			<h2>장바구니 목록</h2>
 			<form method="post">
 				<table>
-					<tr id="select">
-						<td colspan="6"><select id="startMoney" name="startMoney">
-								<option>=최하=</option>
-								<c:choose>
-									<c:when test="${startMoney==1000 }">
-										<option selected="selected">1000</option>
-										<option>2000</option>
-										<option>3000</option>
-										<option>4000</option>
-										<option>5000</option>
-									</c:when>
-									<c:when test="${startMoney==2000 }">
-										<option>1000</option>
-										<option selected="selected">2000</option>
-										<option>3000</option>
-										<option>4000</option>
-										<option>5000</option>
-									</c:when>
-									<c:when test="${startMoney==3000 }">
-										<option>1000</option>
-										<option>2000</option>
-										<option selected="selected">3000</option>
-										<option>4000</option>
-										<option>5000</option>
-									</c:when>
-									<c:when test="${startMoney==4000 }">
-										<option>1000</option>
-										<option>2000</option>
-										<option>3000</option>
-										<option selected="selected">4000</option>
-										<option>5000</option>
-									</c:when>
-									<c:when test="${startMoney==5000 }">
-										<option>1000</option>
-										<option>2000</option>
-										<option>3000</option>
-										<option>4000</option>
-										<option selected="selected">5000</option>
-									</c:when>
-									<c:otherwise>
-										<option>1000</option>
-										<option>2000</option>
-										<option>3000</option>
-										<option>4000</option>
-										<option>5000</option>
-									</c:otherwise>
-								</c:choose>
-						</select> <select id="endMoney" name="endMoney">
-								<option>=최고=</option>
-								<c:choose>
-									<c:when test="${endMoney==1000 }">
-										<option selected="selected">1000</option>
-										<option>2000</option>
-										<option>3000</option>
-										<option>4000</option>
-										<option>5000</option>
-									</c:when>
-									<c:when test="${endMoney==2000 }">
-										<option>1000</option>
-										<option selected="selected">2000</option>
-										<option>3000</option>
-										<option>4000</option>
-										<option>5000</option>
-									</c:when>
-									<c:when test="${endMoney==3000 }">
-										<option>1000</option>
-										<option>2000</option>
-										<option selected="selected">3000</option>
-										<option>4000</option>
-										<option>5000</option>
-									</c:when>
-									<c:when test="${endMoney==4000 }">
-										<option>1000</option>
-										<option>2000</option>
-										<option>3000</option>
-										<option selected="selected">4000</option>
-										<option>5000</option>
-									</c:when>
-									<c:when test="${endMoney==5000 }">
-										<option>1000</option>
-										<option>2000</option>
-										<option>3000</option>
-										<option>4000</option>
-										<option selected="selected">5000</option>
-									</c:when>
-									<c:otherwise>
-										<option>1000</option>
-										<option>2000</option>
-										<option>3000</option>
-										<option>4000</option>
-										<option>5000</option>
-									</c:otherwise>
-								</c:choose>
-						</select> <input type="submit" value="검색" formaction="dogCartSearch.dog" />
-						</td>
-					</tr>
 					<tr class="tr_top">
 						<td><input type="checkbox" id="allCheck" name="allCheck"
 							onclick="checkAll(this.form)" /></td>
@@ -218,9 +122,9 @@ table {
 							<td>${status.index+1 }<!-- 번호값 계산  --></td>
 							<td><img src="${pageContext.request.contextPath }/images/${cart.product_image }" id="cartImage" /></td>
 							<td>${cart.product_name }</td>
-							<td>${cart.product_price }</td>
+							<td>${(cart.product_price)*(cart.product_quantity) }</td>
 							<td>
-							<input type="text" id="product_quantity" name="product_quantity" size="1" value="${product_quantity }" />개
+							<input type="text" id="product_quantity" name="product_quantity" size="1" value="${cart.product_quantity }" />개
 							</td>
 
 						</tr>

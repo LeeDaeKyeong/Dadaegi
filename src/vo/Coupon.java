@@ -11,6 +11,15 @@ public class Coupon {
 	private String coupon_content;
 	private int coupon_index;
 	private int total_price;
+	private String inout_coupon;
+
+	public String getInout_coupon() {
+		return inout_coupon;
+	}
+
+	public void setInout_coupon(String inout_coupon) {
+		this.inout_coupon = inout_coupon;
+	}
 
 	public int getTotal_price() {
 		return total_price;

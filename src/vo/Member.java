@@ -12,6 +12,15 @@ public class Member {
 	private String member_zip;
 	private String member_addr;
 	private String member_addr_detail;
+	private int coupon_price;
+
+	public int getCoupon_price() {
+		return coupon_price;
+	}
+
+	public void setCoupon_price(int coupon_price) {
+		this.coupon_price = coupon_price;
+	}
 
 	public String getMember_id() {
 		return member_id;

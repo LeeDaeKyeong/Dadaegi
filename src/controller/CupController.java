@@ -19,6 +19,7 @@ import cup.action.CupCartRemoveAction;
 import cup.action.CupListAction;
 import cup.action.CupOrderAction;
 import cup.action.CupViewAction;
+import cup.action.OrderComplateAction;
 import cup.action.cupDirectOrderAction;
 import cup.action.drinkListAction;
 
@@ -143,10 +144,18 @@ public class CupController extends HttpServlet {
 				e.printStackTrace();
 			}
 		}else if(command.equals("/orderComplate.cup")) {
-			request.setAttribute("pagefile", "cupShopping/orderComplate.jsp");
+			action = new OrderComplateAction();
+			//프로젝트명+기능+형태(?)
+			try {
+				forward = action.execute(request, response);
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+		} else if (command.equals("/map.cup")) {
+			request.setAttribute("pagefile", "map.jsp");
 			forward = new ActionForward();
 			forward.setPath("template.jsp");
-			
+
 		}
 		
 

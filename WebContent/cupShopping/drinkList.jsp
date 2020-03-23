@@ -39,7 +39,7 @@ table {
 	width: 150px;
 	height: 150px;
 	border: none;
-	margin-right: 20px;
+
 }
 
 #todayImage {

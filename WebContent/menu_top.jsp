@@ -14,7 +14,7 @@ body, div, ul, li {
 
 body {
 	font-size: 14px;
-	font-family: "맑은 고딕", arial;
+	font-family: "나눔고딕", arial;
 }
 
 ul {
@@ -35,7 +35,7 @@ a {
 .gnb>ul>li {
 	display: inline-block;
 	/*float: left;*/
-	width: 150px;
+	width: 120px;
 	height: 40px;
 	margin-top: 0;
 	position: relative;
@@ -45,15 +45,15 @@ a {
 	display: block;
 	width: 100px;
 	height: 100%;
-	font: bold 15px/32px "맑은 고딕", arial;
+	font: 15px/32px "나눔고딕", arial;
 	text-align: center;
-	color: #F7819F;
+	color: #000000;
 	background: #ffffff;
 }
 
 .gnb ul li a:hover {
-	color: #000;
-	background: #FFA7A7;
+	color: gray;
+	background: #ffffff;
 }
 
 /*롤오버*/
@@ -69,37 +69,46 @@ h2 {
 .loginlink {
 	text-align: right;
 	margin-left: auto;
+	font-size: 14px;
 }
 
 #rogo{
-width : 150px;
-height : 100px;
+width : 210px;
+height : 150px;
+display: block;
 }
 
 #alarm{
-width: 15px;
-height: 15px;
+width: 20px;
+height: 20px;
+}
+
+#loginImage{
+width: 20px;
+height: 20px;
 }
 </style>
 </head>
 <body>
+	<div style="float:center;">
 	<a href="main.cup"> 
-		<img id="rogo" src="images/rogo.jpg" align="center"
-		border="0">
+		<img id="rogo" src="images/rogo.jpg" border="0">
 	</a>
-	<br>
+	</div>
 	<div style="float: right;">
 		<c:choose>
 			<c:when test="${member eq null }">
-				<a class="loginlink" href="loginForm.log">로그인</a>
+				<a class="loginlink" href="loginForm.log"><img id="loginImage" src="images/login-icon-12-256.jpg">로그인</a>
 			</c:when>
 			<c:otherwise>
 				<a href="#"> <!-- 추후에 if문으로 알림 전 후 이미지 설정하기 -->
 				<img id="alarm" src="images/alarm.jpg" align="center" border="0">
 				</a>
-				${member.member_id}님, 환영합니다!
-				<a class="loginlink" href="memberInfo.mem?member_id=${member.member_id}">마이페이지</a>
-				<a class="loginlink" href="logout.log">로그아웃</a>
+				${member.member_id}님, 환영합니다!&nbsp;
+				<a class="loginlink" href="logout.log">로그아웃</a>&nbsp;
+				<a class="loginlink" href="memberInfo.mem?member_id=${member.member_id}">마이페이지</a>&nbsp;
+				<a class="loginlink" href="#">장바구니</a>&nbsp;
+				<a class="loginlink" href="#">주문/배송</a>
 			</c:otherwise>
 		</c:choose>
 	</div>
@@ -113,5 +122,6 @@ height: 15px;
 			<li><a class="menuLink" href="review.cup">리뷰</a></li>
 		</ul>
 	</div>
+	
 </body>
 </html>
