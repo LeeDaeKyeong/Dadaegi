@@ -159,6 +159,21 @@ footer a {
 	text-decoration: none;
 	margin-right: 5px;
 }
+
+img {
+	width: 20px;
+	height: 20px;
+	margin-left:10px;
+}
+
+input#sendnote {
+	background: url(images/mail.png);
+	background-repeat: no-repeat;
+	width: 100px;
+	height: 40px;
+	border : none;
+	cursor: pointer;
+}
 </style>
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script>
@@ -448,6 +463,14 @@ footer a {
 			</ul>
 		</li>
 	</ul>
+	<div class="note">
+		<img src="images/mail.png"/>
+		
+		<input type="button" id="sendnote" name="sendnote"
+			onClick="window.open('Mmember/send_note.jsp?send_id=${member.member_id}','new','width=500px,height=500px,location=no,status=no,scrollbars=no');"
+			value="쪽지 보내기" />
+	</div>
+
 	<footer>
 		<p>Master Mode</p>
 	</footer>

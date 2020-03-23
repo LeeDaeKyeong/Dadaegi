@@ -13,6 +13,7 @@ import javax.sql.DataSource;
 import dao.MemberDAO;
 import vo.Coupon;
 import vo.Member;
+import vo.Note;
 import vo.Rating;
 import vo.Review;
 import vo.Total_view;
@@ -646,5 +647,118 @@ public class MemberDAO {
 		}
 
 		return pointSearch;
+	}
+
+	public int insertNote(Note note) {
+		// TODO Auto-generated method stub
+		PreparedStatement pstmt = null;
+		int insertCount = 0;
+		String sql = "";
+
+		try {
+			sql = "INSERT INTO note (recv_id, send_id,note_content,recv_chk, send_date) VALUES (?,?,?,0,now())";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, note.getRecv_id());
+			pstmt.setString(2, note.getSend_id());
+			pstmt.setString(3, note.getNote_content());
+			insertCount = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return insertCount;
+	}
+
+	public int selectNoteListCount() {
+		// TODO Auto-generated method stub
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		int count = 0;
+
+		String sql = "select count(*) from note";
+
+		try {
+			pstmt = con.prepareStatement(sql);
+
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				count = rs.getInt(1);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		return count;
+	}
+
+	public ArrayList<Note> selectNoteList(int page, int limit, String member_id) {
+		// TODO Auto-generated method stub
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		ArrayList<Note> noteList = null;
+
+		int startrow = (page - 1) * limit;
+
+		String sql = "select * from note where recv_id=? and recv_chk=0 limit ?,?";
+
+		try {
+
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, member_id);
+			pstmt.setInt(2, startrow);
+			pstmt.setInt(3, limit);
+
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				noteList = new ArrayList<Note>();
+				do {
+					Note note = new Note();
+					note.setNote_index(rs.getInt("note_index"));
+					note.setSend_id(rs.getString("send_id"));
+					note.setRecv_id(rs.getString("recv_id"));
+					note.setRecv_chk(rs.getInt("recv_chk"));
+					note.setNote_content(rs.getString("note_content"));
+					note.setSend_date(rs.getString("send_date"));
+					noteList.add(note);
+				} while (rs.next());
+			}
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		return noteList;
+	}
+
+	public int selectNoteCount(String member_id) {
+		// TODO Auto-generated method stub
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		int count = 0;
+
+		String sql = "select count(*) from note where recv_chk=0 and recv_id=?";
+
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, member_id);
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				count = rs.getInt(1);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		return count;
 	}
 }

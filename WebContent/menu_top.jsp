@@ -72,43 +72,70 @@ h2 {
 	font-size: 14px;
 }
 
-#rogo{
-width : 210px;
-height : 150px;
-display: block;
+#rogo {
+	width: 210px;
+	height: 150px;
+	display: block;
 }
 
-#alarm{
-width: 20px;
-height: 20px;
+#alarm {
+	width: 20px;
+	height: 20px;
 }
 
-#loginImage{
-width: 20px;
-height: 20px;
+#loginImage {
+	width: 20px;
+	height: 20px;
 }
 </style>
 </head>
 <body>
-	<div style="float:center;">
-	<a href="main.cup"> 
-		<img id="rogo" src="images/rogo.jpg" border="0">
-	</a>
+	<div style="float: center;">
+		<a href="main.cup"> <img id="rogo" src="images/rogo.jpg"
+			border="0">
+		</a>
 	</div>
 	<div style="float: right;">
 		<c:choose>
 			<c:when test="${member eq null }">
-				<a class="loginlink" href="loginForm.log"><img id="loginImage" src="images/login-icon-12-256.jpg">로그인</a>
+				<a class="loginlink" href="loginForm.log"><img id="loginImage"
+					src="images/login-icon-12-256.jpg">로그인</a>
 			</c:when>
 			<c:otherwise>
-				<a href="#"> <!-- 추후에 if문으로 알림 전 후 이미지 설정하기 -->
-				<img id="alarm" src="images/alarm.jpg" align="center" border="0">
-				</a>
+				<c:choose>
+					<c:when test="${member.member_rating eq '관리자'}">
+						<a href="#"> <!-- 추후에 if문으로 알림 전 후 이미지 설정하기 --> <img
+							id="alarm" src="images/alarm.jpg" align="center" border="0">
+						</a>
+					관리자님, 환영합니다!&nbsp;
+						<a class="loginlink"
+							href="Mtemplate.jsp?member_id=${member.member_id}">관리자 페이지</a>&nbsp;
+							<a class="loginlink" href="logout.log">로그아웃</a>&nbsp;
+					</c:when>
+					<c:otherwise>
+						<c:choose>
+							<c:when test="${noteCount ne 0 }">
+								<a href="noteList.mem?member_id=${member.member_id }"> <!-- 추후에 if문으로 알림 전 후 이미지 설정하기 -->
+									<img id="alarm" src="images/alarm_new.jpg" align="center"
+									border="0">${noteCount }
+								</a>
+							</c:when>
+							<c:otherwise>
+								<a href="noteList.mem?member_id=${member.member_id }"> <!-- 추후에 if문으로 알림 전 후 이미지 설정하기 -->
+									<img id="alarm" src="images/alarm.jpg" align="center"
+									border="0">
+								</a>
+							</c:otherwise>
+						</c:choose>
+						
 				${member.member_id}님, 환영합니다!&nbsp;
 				<a class="loginlink" href="logout.log">로그아웃</a>&nbsp;
-				<a class="loginlink" href="memberInfo.mem?member_id=${member.member_id}">마이페이지</a>&nbsp;
+				<a class="loginlink"
+							href="memberInfo.mem?member_id=${member.member_id}">마이페이지</a>&nbsp;
 				<a class="loginlink" href="#">장바구니</a>&nbsp;
 				<a class="loginlink" href="#">주문/배송</a>
+					</c:otherwise>
+				</c:choose>
 			</c:otherwise>
 		</c:choose>
 	</div>
@@ -122,6 +149,6 @@ height: 20px;
 			<li><a class="menuLink" href="review.cup">리뷰</a></li>
 		</ul>
 	</div>
-	
+
 </body>
 </html>

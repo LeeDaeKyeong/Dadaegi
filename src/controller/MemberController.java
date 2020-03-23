@@ -21,6 +21,7 @@ import Mmember.action.PointDetailAction;
 import Mmember.action.RatingDeleteAction;
 import Mmember.action.RatingDetailAction;
 import Mmember.action.RatingModAction;
+import Mmember.action.SendNoteAction;
 import action.Action;
 import member.action.IdCheckAction;
 import member.action.MemberDelAction;
@@ -29,6 +30,7 @@ import member.action.MemberJoinProAction;
 import member.action.MemberModAction;
 import member.action.MemberModProAction;
 import member.action.PointSearchAction;
+import member.action.NoteListAction;
 import action.ActionForward;
 
 /**
@@ -48,7 +50,7 @@ public class MemberController extends javax.servlet.http.HttpServlet {
 		ActionForward forward = null;
 		Action action = null;
 
-//    	System.out.println(command);
+		System.out.println(command);
 		if (command.equals("/joinForm.mem")) {
 			forward = new ActionForward();
 			request.setAttribute("pagefile", "member/joinForm.jsp");
@@ -189,6 +191,20 @@ public class MemberController extends javax.servlet.http.HttpServlet {
 			forward.setPath("/template.jsp");
 		} else if (command.equals("/pointSearch.mem")) { // 포인트 날짜 검색 버튼 누를때 실행
 			action = new PointSearchAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} else if (command.equals("/sendNote.mem")) {
+			action = new SendNoteAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}else if (command.equals("/noteList.mem")) {
+			action = new NoteListAction();
 			try {
 				forward = action.execute(request, response);
 			} catch (Exception e) {

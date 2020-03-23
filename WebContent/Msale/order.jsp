@@ -136,7 +136,7 @@
 									<td
 										style="${order.payment_status eq '결제완료' ? 'background-color : lightgray' : 'border : solid 1px pink'  };">${order.payment_status }</td>
 									<td
-										style="${order.order_status eq '배달완료' ? 'background-color : lightgray' : 'border : solid 1px pink'  };">${order.order_status }</td>
+										style="${order.order_status eq '배달완료' || order.order_status eq '전달완료' ? 'background-color : lightgray' : 'border : solid 1px pink'  };">${order.order_status }</td>
 								</tr>
 							</tbody>
 						</c:forEach>
